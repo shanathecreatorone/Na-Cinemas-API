@@ -1,2 +1,192 @@
 #%RAML 1.0
 title: Na Cinemas API
+version: 1.0
+
+types:
+  Tickets: !include /data-types/tickets.raml
+  Snacks: !include /data-types/snacks.raml
+
+/tickets: 
+  get:
+    description: Gets all tickets based on the given query parameters
+    queryParameters:
+      type: 
+        displayName: Ticket ID
+        description: Ticket ID number 
+        required: true
+        type: integer
+      Ticket Type:
+        displayName: Ticket Type
+        description: Shows whether it Balcony or First Class ticket
+        required: false
+        type: string
+      Ticket Price:
+        displayName: Ticket Price
+        description: Displays the price of the ticket in rupees
+        required: false
+        type: string
+      Ticket Number:
+        displayName: Ticket Number
+        description: Shows the row and seat number of the ticket
+        required: false
+        type: string
+      Ticket Booked:
+        displayName: Ticket Booked
+        description: Shows whether ticket has been booked
+        required: false
+        type: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: Tickets[]
+            example: !include /examples/ticketsexample.raml
+      400:
+        body:
+          application/json:
+            example:
+              message: Error retrieving Ticket data!
+              
+  post:
+    displayName: Add new ticket
+    description: Create a new ticket
+    body:
+      application/json:
+        type: Tickets[]
+        example: !include /examples/newtickets.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: New ticket created!
+      400:
+        body:
+          application/json:
+            example:
+              message: Error creating new ticket.
+              
+
+  put:
+    description: Update a ticket
+    body:
+      application/json:
+        type: 
+        examples: 
+          input: 
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: Ticket Updated!
+
+  delete:
+    description: Delete a ticket
+    responses:
+      200:   
+        body:
+          application/json:
+            example:
+              message: Ticket deleted!
+              
+  /{ticket_id}:
+    get:
+      description: Find tickets by ID
+      responses:
+        200:
+          body:
+            application/json:
+              type: 
+              examples:
+                output: 
+                                                                         
+/snacks:
+  get:
+    description: Gets all snacks based on the given query parameters
+    queryParameters:
+      type: 
+      Snack ID:
+        displayName: Snack ID
+        description: Snack ID number 
+        required: true
+        type: integer
+      Snack Type:
+        displayName: Snack Type
+        description: Shows whether snack is veg or non-veg
+        required: false
+        type: string
+      Snack Name:
+        displayName: Snack Price
+        description: Displays the name of the snack
+        required: false
+        type: string
+      Snack Price:
+        displayName: Snack Price
+        description: Shows the price of the snack in rupees
+        required: false
+        type: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: Snacks[]
+            example: !include /examples/snacks-example.raml
+      400:
+        body:
+          application/json:
+            example:
+              message: Error retrieving snack data!
+
+  post:
+    displayName: Add new snack
+    description: Create a new snack
+    body:
+      application/json:
+        type: Snacks[]
+        example: !include /examples/newsnacks.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: New snack created!
+      400:
+        body:
+          application/json:
+            example:
+              message: Error creating new snack.
+
+  put:
+    description: Update a snack
+    body:
+      application/json:
+        type: 
+        example: 
+          input:!include 
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: Snack updated!
+          
+  delete:
+    description: Delete a snack
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: Snack deleted!
+
+  /{snack_id}:
+      description: Find snacks by ID
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                type: 
+                examples:
+                  output:
